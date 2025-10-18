@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatterBox - AI Voice & Text Conversion Service</title>
+    <!-- Standard Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+
+<!-- For iOS/Safari Mobile Devices -->
+<link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+
+<!-- For Android/Chrome Devices -->
+<link rel="icon" type="image/png" sizes="192x192" href="favicon_io/android-chrome-192x192.png">
+
+<!-- Fallback ICO file (Optional but recommended for legacy support) -->
+<link rel="shortcut icon" href="/favicon_io/favicon.ico">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary-neon': '#39ff14', /* Neon Green */
+                        'bg-dark': '#0a0a0a', /* Near Black */
+                        'card-dark': '#151515', /* Dark Card Background */
+                        'error-red': '#ff3914',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body class="p-4 md:p-8 flex flex-col items-center min-h-screen font-sans bg-bg-dark">
+
+    <div class="w-full max-w-6xl">
+        <header class="flex justify-between items-center py-4 px-0 mb-8 border-b border-gray-800">
+            <h1 class="text-2xl font-extrabold text-white tracking-widest">
+                Chatter<span class="text-primary-neon">Box</span>
+            </h1>
+            <nav>
+                <button id="nav-home-btn" class="text-gray-400 hover:text-primary-neon transition px-3 py-1 rounded-md text-sm md:text-base">Home</button>
+                <button id="nav-converter-btn" class="btn-primary text-sm md:text-base ml-4">Start Conversion</button>
+            </nav>
+        </header>
+
+        <main class="w-full max-w-5xl mx-auto">
+
+            <div id="home-view" class="view-container">
+                <div class="text-center py-16 md:py-24">
+                    <h2 class="text-5xl md:text-7xl font-extrabold text-white mb-4 tracking-tighter">
+                        Generate. Convert. <span class="text-primary-neon">Deliver.</span>
+                    </h2>
+                    <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-10">
+                        The ultimate AI platform for high-quality **Text-to-Speech (TTS)** audio generation and precise **Speech-to-Text (STT)** transcription, optimized for professional use.
+                    </p>
+                    <button id="home-start-btn" class="btn-primary text-xl px-8 py-4 shadow-lg">
+                        Access the Studio
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
+                    <div class="card p-8 transition duration-300">
+                        <div class="flex items-center mb-4">
+                            <svg class="w-8 h-8 text-primary-neon mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l3.586-3.586a1 1 0 011.414 0z"></path></svg>
+                            <h3 class="text-3xl font-bold text-white">Text-to-Speech (TTS)</h3>
+                        </div>
+                        <p class="text-gray-400 mb-4">
+                            Produce natural, human-like voiceovers from any text, with full control over attributes like voice, rate, and pitch. **Export as ready-to-use WAV/MP3 files.**
+                        </p>
+                        <h4 class="text-lg font-semibold text-primary-neon mb-2">Core Value Proposition:</h4>
+                        <ul class="list-none space-y-2 text-gray-300">
+                            <li class="flex items-start">
+                                <span class="text-primary-neon text-lg mr-2">&bull;</span>
+                                **Cost Efficiency:** Create voiceovers instantly, eliminating the high costs and delays of hiring human voice actors.
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-neon text-lg mr-2">&bull;</span>
+                                **Accessibility & Inclusion:** Instantly make your web content and documents accessible to a broader audience.
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-neon text-lg mr-2">&bull;</span>
+                                **Brand Consistency:** Maintain a unified brand voice across all digital and audio touchpoints.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card p-8 transition duration-300">
+                        <div class="flex items-center mb-4">
+                            <svg class="w-8 h-8 text-primary-neon mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a1 1 0 110-2 1 1 0 010 2z"></path></svg>
+                            <h3 class="text-3xl font-bold text-white">Speech-to-Text (STT)</h3>
+                        </div>
+                        <p class="text-gray-400 mb-4">
+                            Capture spoken words and accurately transcribe them into editable, searchable text in real-time. Ideal for documentation and data capture.
+                        </p>
+                        <h4 class="text-lg font-semibold text-primary-neon mb-2">Core Value Proposition:</h4>
+                        <ul class="list-none space-y-2 text-gray-300">
+                            <li class="flex items-start">
+                                <span class="text-primary-neon text-lg mr-2">&bull;</span>
+                                **Efficiency & Speed:** Convert lengthy voice notes, meetings, and interviews into text much faster than manual transcription.
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-neon text-lg mr-2">&bull;</span>
+                                **Actionable Data:** Create searchable transcripts of customer interactions or internal discussions for quick analysis and insight extraction.
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-neon text-lg mr-2">&bull;</span>
+                                **SEO & Content Repurposing:** Generate subtitles and transcripts for video and audio content to boost search engine optimization.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <section class="mt-20">
+                    <h2 class="text-4xl font-extrabold text-white text-center mb-10 tracking-tight border-b border-primary-neon/50 pb-4">
+                        💼 Commercial Applications: Monetize Your Content
+                    </h2>
+                    <p class="text-lg text-gray-400 text-center max-w-4xl mx-auto mb-12">
+                        ChatterBox provides the output files you need to power your business, from automated customer service to professional content creation.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        
+                        <div class="card p-6 transition duration-300 hover:border-primary-neon">
+                            <h3 class="text-xl font-bold text-primary-neon mb-3">Customer Experience Automation</h3>
+                            <ul class="list-none space-y-2 text-gray-300 text-sm">
+                                <li class="flex items-start">
+                                    <span class="text-primary-neon text-lg mr-2">&bull;</span>
+                                    **Voicebots (TTS):** Generate dynamic, high-fidelity speech for virtual assistants and IVR systems to enhance customer self-service.
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-primary-neon text-lg mr-2">&bull;</span>
+                                    **Conversational Intelligence (STT):** Transcribe all calls in real-time to analyze customer sentiment, identify trends, and guide human agents.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="card p-6 transition duration-300 hover:border-primary-neon">
+                            <h3 class="text-xl font-bold text-primary-neon mb-3">Media Production & E-Learning</h3>
+                            <ul class="list-none space-y-2 text-gray-300 text-sm">
+                                <li class="flex items-start">
+                                    <span class="text-primary-neon text-lg mr-2">&bull;</span>
+                                    **Licensed Audio (TTS):** Create and download voiceovers (WAV/MP3 format) for commercial distribution, including YouTube, podcasts, and video advertisements.
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-primary-neon text-lg mr-2">&bull;</span>
+                                    **Rapid Dubbing:** Convert written scripts to audio in multiple languages for immediate global market entry.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="card p-6 transition duration-300 hover:border-primary-neon">
+                            <h3 class="text-xl font-bold text-primary-neon mb-3">Professional & Medical Dictation</h3>
+                            <ul class="list-none space-y-2 text-gray-300 text-sm">
+                                <li class="flex items-start">
+                                    <span class="text-primary-neon text-lg mr-2">&bull;</span>
+                                    **Hands-Free Documentation (STT):** Dictate legal notes, medical records, or meeting minutes with high accuracy, saving hours on manual data entry.
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-primary-neon text-lg mr-2">&bull;</span>
+                                    **Transcription Export:** Quickly download raw or cleaned transcripts for immediate use in reports, CMS, or archiving.
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+
+            <div id="converter-view" class="view-container hidden">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white text-center mb-10 tracking-tight">
+                    AI Conversion Studio
+                </h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="card p-6 md:p-8 border border-primary-neon/20">
+                        <h3 class="text-2xl font-bold text-primary-neon mb-6">Text to Speech (TTS) Generator</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="tts-text" class="block text-sm font-medium text-gray-300 mb-1">Text for Voice Generation</label>
+                                <textarea id="tts-text" rows="5" class="input-field resize-none" placeholder="Enter text to convert to high-fidelity speech..."></textarea>
+                            </div>
+
+                            <div>
+                                <label for="voice-select" class="block text-sm font-medium text-gray-300 mb-1">Select Voice</label>
+                                <select id="voice-select" class="input-field"></select>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <div class="flex-1">
+                                    <label for="rate" class="block text-sm font-medium text-gray-300 mb-1">
+                                        Rate: <span id="rate-value" class="font-semibold text-primary-neon">1.0</span>
+                                    </label>
+                                    <input type="range" id="rate" min="0.5" max="2" value="1" step="0.1" class="slider-field">
+                                </div>
+                                <div class="flex-1">
+                                    <label for="pitch" class="block text-sm font-medium text-gray-300 mb-1">
+                                        Pitch: <span id="pitch-value" class="font-semibold text-primary-neon">1.0</span>
+                                    </label>
+                                    <input type="range" id="pitch" min="0" max="2" value="1" step="0.1" class="slider-field">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="format-select" class="block text-sm font-medium text-gray-300 mb-1">Download Format</label>
+                                <select id="format-select" class="input-field">
+                                    <option value="wav">WAV (Lossless, High Quality)</option>
+                                    <option value="mp3">MP3 (Compressed, Universal)</option>
+                                </select>
+                            </div>
+                            
+                            <div id="tts-status-msg" class="h-6 text-sm font-medium text-center text-gray-400"></div>
+
+                            <div class="flex gap-4 pt-4">
+                                <button id="speak-btn" class="btn-primary flex-1">
+                                    <svg class="w-5 h-5 inline mr-2 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l3.586-3.586a1 1 0 011.414 0z"></path></svg>
+                                    Preview Audio
+                                </button>
+                                <button id="stop-btn" class="btn-stop flex-1" disabled>
+                                    <svg class="w-5 h-5 inline mr-2 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6"></path></svg>
+                                    Stop
+                                </button>
+                            </div>
+                            <button id="download-audio-btn" class="btn-primary w-full max-w-full mt-2 disabled:opacity-50" disabled>
+                                <svg class="w-5 h-5 inline mr-2 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                **Download WAV Audio File**
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card p-6 md:p-8 border border-primary-neon/20">
+                        <h3 class="text-2xl font-bold text-primary-neon mb-6">Speech to Text (STT) Transcription</h3>
+                        <div class="space-y-4">
+                            <div class="h-10 flex items-center justify-center p-2 rounded-lg text-sm font-semibold" id="stt-status">
+                                <span class="text-gray-400">Ready to record voice input.</span>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Transcription Output</label>
+                                <textarea id="stt-output" rows="10" class="input-field" readonly placeholder="Your high-accuracy transcription will appear here..."></textarea>
+                            </div>
+
+                            <div class="flex justify-center pt-4">
+                                <button id="start-stt-btn" class="btn-primary w-full max-w-xs transition-all duration-300">
+                                    <svg class="w-6 h-6 inline mr-2 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a1 1 0 110-2 1 1 0 010 2z"></path></svg>
+                                    Start Transcription
+                                </button>
+                            </div>
+                            
+                            <p id="stt-warning" class="text-xs text-primary-neon/70 text-center mt-2 hidden">
+                                *Speech Recognition uses the `webkitSpeechRecognition` API and is best supported in Chrome-based browsers.
+                            </p>
+                            <button id="download-transcript-btn" class="btn-secondary w-full max-w-xs mt-2 disabled:opacity-50 mx-auto block" disabled>
+                                <svg class="w-4 h-4 inline mr-1 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                Download Transcript (TXT)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="w-full max-w-6xl mt-20 py-8 border-t border-gray-800 text-center text-gray-500">
+        <div class="max-w-4xl mx-auto px-4">
+            <h4 class="text-xl font-bold text-white mb-2">Chatter<span class="text-primary-neon">Box</span></h4>
+            <p class="text-sm mb-4">Empowering businesses with high-fidelity, downloadable audio and precision transcription services.</p>
+            <div class="flex justify-center space-x-6 text-sm">
+                <a href="#" class="hover:text-primary-neon transition">Pricing & Plans</a>
+                <a href="#" class="hover:text-primary-neon transition">API Documentation</a>
+                <a href="#" class="hover:text-primary-neon transition">Support</a>
+                <a href="#" class="hover:text-primary-neon transition">Legal & Licensing</a>
+            </div>
+            <p class="mt-4 text-xs">&copy; 2025 ChatterBox Professional Services. All rights reserved. Technology powered by Neural AI.</p>
+        </div>
+    </footer>
+<script src="secrets.js"></script> <script src="script.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

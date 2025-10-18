@@ -1,0 +1,130 @@
+/* ----------------------------------------------------------------
+ * BASE STYLES & COMPONENTS
+ * Note: Tailwind utility classes (like bg-bg-dark, text-white, etc.) 
+ * applied directly to HTML elements handle most of the layout and colors.
+ * These custom styles are for specific component appearance and overrides.
+ * ---------------------------------------------------------------- */
+
+/* --- Card Styles --- */
+.card {
+    /* Mapped from Tailwind config: background-color: card-dark */
+    background-color: #151515;
+    padding: 1.5rem;
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-2xl */
+    border: 1px solid #1f2937; /* border-gray-800 */
+    transition: all 300ms;
+}
+.card:hover {
+    /* Adjust border color on hover (primary-neon/50) */
+    border-color: rgba(57, 255, 20, 0.5); 
+}
+
+/* --- Input Field Styles (Textarea/Select) --- */
+.input-field {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background-color: #0a0a0a; /* bg-dark */
+    border: 1px solid #4b5563; /* border-gray-700 */
+    color: #ffffff;
+    transition: all 200ms;
+}
+.input-field:focus {
+    outline: none;
+    border-color: #39ff14; /* primary-neon */
+    box-shadow: 0 0 0 1px #39ff14;
+}
+
+
+/* ----------------------------------------------------------------
+ * BUTTON STYLES
+ * ---------------------------------------------------------------- */
+
+/* --- Primary Button (Neon Green) --- */
+.btn-primary {
+    background-color: #39ff14; /* primary-neon */
+    color: #0a0a0a; /* bg-dark */
+    font-weight: bold;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 200ms;
+    cursor: pointer;
+}
+.btn-primary:hover {
+    background-color: #ffffff;
+}
+
+/* --- Stop Button (Gray) --- */
+.btn-stop {
+    background-color: #4b5563; /* gray-700 */
+    color: #ffffff;
+    font-weight: bold;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 200ms;
+    cursor: pointer;
+}
+
+/* --- Secondary Button (Outline) --- */
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid #4b5563; /* border-gray-600 */
+    color: #d1d5db; /* gray-300 */
+    font-weight: bold;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 200ms;
+    cursor: pointer;
+}
+.btn-secondary:hover {
+    background-color: #1f2937; /* gray-800 */
+}
+
+/* --- Disabled State (applies to all buttons with opacity classes) --- */
+button:disabled, .btn-primary:disabled, .btn-stop:disabled, .btn-secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* ----------------------------------------------------------------
+ * SLIDER STYLES (for rate and pitch range inputs)
+ * ---------------------------------------------------------------- */
+
+.slider-field {
+    width: 100%;
+    -webkit-appearance: none; /* Required for Chrome/Safari */
+    appearance: none;
+    height: 8px; /* Track height */
+    background: #4b5563; /* Dark track color (gray-700) */
+    border-radius: 4px;
+}
+
+/* Style for the slider thumb (the draggable circle) */
+.slider-field::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #39ff14; /* primary-neon */
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #0a0a0a; /* border-bg-dark */
+    transition: background 0.2s;
+}
+
+/* Hover effect for the slider thumb */
+.slider-field::-webkit-slider-thumb:hover {
+    background: #ffffff;
+}
+
+/* Fallback/standard styling for the thumb */
+.slider-field::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #39ff14;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #0a0a0a;
+}
