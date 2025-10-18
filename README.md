@@ -1,81 +1,90 @@
+# ChatterBox: AI Voice & Text Conversion Studio 
 
------
-
-# ChatterBox: AI Voice & Text Conversion Service 
-
-[](https://www.google.com/url?sa=E&source=gmail&q=https://shahvez-khan.github.io/ChatterBox/)
+[](https://www.google.com/search?q=https://shahvez-khan.github.io/ChatterBox/)
 [](https://github.com/shahvez-khan/ChatterBox)
 [](https://opensource.org/licenses/MIT)
 
-## 🌟 Overview
+A modern, front-end web application for professional-grade **Text-to-Speech (TTS)** generation and accurate **Speech-to-Text (STT)** transcription services. The project is designed for deployment as a static site and implements a robust security pattern to protect API keys.
 
-**ChatterBox** is a modern, pure front-end web application that provides high-fidelity **Text-to-Speech (TTS)** generation and accurate **Speech-to-Text (STT)** transcription services. This project demonstrates effective integration of advanced AI capabilities within a professional, dark-themed user interface.
+-----
 
-The application is designed to be fully deployable as a static site (e.g., via GitHub Pages), with a robust security mechanism implemented to protect sensitive API keys.
+## ✨ Features
 
-## ✨ Key Features
+### Text-to-Speech (TTS)
 
-  * **Text-to-Speech (TTS) Generation:** Produce natural, human-like voiceovers from any text input.
-  * **High-Fidelity Audio:** Utilizes the `gemini-2.5-flash-preview-tts` model for voice synthesis.
-  * **Voice Control:** Allows selection of various prebuilt voice options (e.g., Kore, Puck, Zephyr, Charon).
-  * **Speech-to-Text (STT) Transcription:** Captures spoken words from the microphone and accurately transcribes them in real-time.
-  * **Downloadable Output:** Users can download generated audio as a WAV file and transcribed text as a TXT file.
-  * **Responsive Design:** Styled using **Tailwind CSS** for a sleek, dark-mode professional interface.
+  * **AI Model:** Utilizes the Google Gemini API (`gemini-2.5-flash-preview-tts`) for high-fidelity voice synthesis.
+  * **Voice Library:** Provides multiple prebuilt voice options (e.g., Kore, Puck, Zephyr, Charon).
+  * **Output:** Generates and allows download of audio files in WAV format.
 
-## 🛠️ Technology Stack
+### Speech-to-Text (STT)
 
-  * **Front-End:** HTML5, CSS3, JavaScript (Vanilla JS)
-  * **Styling:** [Tailwind CSS](https://tailwindcss.com/) (loaded via CDN)
-  * **TTS API:** Google Gemini API (`gemini-2.5-flash-preview-tts`)
-  * **STT API:** Browser's native `webkitSpeechRecognition` API
+  * **Real-time Transcription:** Captures spoken input via the user's microphone and transcribes it in real-time.
+  * **Browser API:** Built upon the native `webkitSpeechRecognition` API.
+  * **Output:** Transcriptions are presented in an editable text area and are downloadable as a TXT file.
 
-## ⚙️ Local Setup and API Key Security
+### Design & Architecture
 
-This project requires a Gemini API Key to run the Text-to-Speech functionality. The key is secured in a local file (`secrets.js`) that is ignored by Git.
+  * **Front-End:** Pure HTML, CSS, and Vanilla JavaScript.
+  * **Styling:** A sleek, dark-mode professional aesthetic is achieved using the **Tailwind CSS** framework.
 
-### Prerequisites
+-----
 
-1.  A valid Gemini API Key.
-2.  Node.js and npm (recommended, but not strictly required for this front-end app).
+## 🛠️ Installation & Local Development
 
-### 1\. Secure Setup
+This is a static front-end application that does not require a build process. It only requires a valid Gemini API Key for the TTS functionality.
 
-Since the API key is secured via a `.gitignore` file, you need to manually re-create the file locally to run the app:
+### 1\. API Key Setup (Security Protocol)
 
-1.  **Create `secrets.js`:** In the root directory (`Text_Speech`), create a file named `secrets.js` and paste your key inside:
+The API key must be available for the application to function, but it cannot be committed to the public repository.
 
+1.  **Git Ignore:** The repository uses a **`.gitignore`** file to exclude `secrets.js` from all commits.
+2.  **Local File Creation:** In the root directory of the project, create a file named **`secrets.js`** and paste your live API key into it:
     ```javascript
-    // secrets.js (DO NOT ADD TO GIT)
+    // secrets.js
     const CHATTERBOX_API_KEY = "YOUR_LIVE_GEMINI_API_KEY_HERE"; 
     ```
+    (Note: The main `script.js` file expects and uses the `CHATTERBOX_API_KEY` variable from this file.)
+3.  **Local Run:** Open the `index.html` file directly in your web browser.
 
-2.  **Verify Code:** The `index.html` file should include the script tag for `secrets.js`, and the `script.js` file should reference the variable `CHATTERBOX_API_KEY`. (If you followed the security steps in the chat, this is already done.)
+### 2\. Project Clone (If cloning this repo)
 
-### 2\. Run Locally
+```bash
+# Clone the repository
+git clone https://github.com/shahvez-khan/ChatterBox.git
 
-Open the `Text_Speech/index.html` file directly in your web browser. The app should load and be fully functional for local testing.
+# Navigate to the project directory
+cd ChatterBox
 
-## 🌐 Deployment (GitHub Pages)
+# Perform API Key Setup (Step 1)
+```
 
-To host your project live on GitHub Pages, follow these critical steps to ensure security and functionality:
+-----
+
+## 🌐 Deployment to GitHub Pages
+
+To make the live site fully functional, the API key file must be present on the web host.
 
 1.  **Enable GitHub Pages:**
 
-      * Go to your repository **Settings** tab on GitHub.
-      * Click **Pages** in the sidebar.
-      * Under "Build and deployment," set **Source** to **`Deploy from a branch`**.
-      * Set **Branch** to **`main`** and the folder to **`/` (root)**, then click **Save**.
+      * On the GitHub repository page, navigate to **Settings** \> **Pages**.
+      * Set **Source** to **`Deploy from a branch`**.
+      * Set **Branch** to **`main`** and the folder to **`/` (root)**. Click **Save**.
 
-2.  **Manually Upload `secrets.js` (CRITICAL STEP):**
+2.  **Manual Upload of `secrets.js`:**
 
-      * Since Git ignores this file, you must upload it directly to the live environment for the TTS feature to work.
-      * Go to the **Code** tab of your repository.
-      * Click **`Add file`** -\> **`Upload files`**.
-      * Drag and drop your local `secrets.js` file.
-      * **Crucially, ensure you commit the change directly to the `main` branch** (do not create a pull request).
+      * Once the repository is deployed, upload the local **`secrets.js`** file directly to the root of the `main` branch via the GitHub web interface.
+      * This critical step bypasses the Git history while making the key available to the live environment.
 
-Your site will be live at `https://shahvez-khan.github.io/ChatterBox/` after a few minutes\!
+### Live Site:
+
+The live version of this application is hosted here:
+
+> [https://shahvez-khan.github.io/ChatterBox/](https://www.google.com/search?q=https://shahvez-khan.github.io/ChatterBox/)
+
+-----
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the LICENSE file (if created) for details.
+This project is licensed under the MIT License.
+
+The MIT License is a permissive free software license, meaning it allows reuse for any purpose, subject to the condition that the copyright and permission notice is preserved.
