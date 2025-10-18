@@ -485,9 +485,9 @@ function initialize() {
     downloadTranscriptBtn.addEventListener('click', downloadTxt); 
 
     // NAVIGATION LISTENERS (Header buttons and Home button)
-    navHomeBtn.addEventListener('click', () => showView('home-view'));
-    navConverterBtn.addEventListener('click', () => showView('converter-view'));
-    homeStartBtn.addEventListener('click', () => showView('converter-view'));
+navHomeBtn.addEventListener('click', (e) => { e.preventDefault(); showView('home-view'); });
+   navConverterBtn.addEventListener('click', (e) => { e.preventDefault(); showView('converter-view'); });
+   homeStartBtn.addEventListener('click', (e) => { e.preventDefault(); showView('converter-view'); });
     
     // NEW NAVIGATION LISTENERS (Footer links and Logo)
     if (logoBtn) {
