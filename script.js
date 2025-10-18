@@ -4,7 +4,7 @@ let recognition = null; // Speech Recognition instance
 let isSpeaking = false;
 // SECURITY FIX: The apiKey is set to an empty string. 
 // The Canvas environment securely provides the key at runtime for API calls.
-const apiKey = CHATTERBOX_API_KEY;
+
 
 // FIX ADDED: Array to hold references to Audio objects currently playing
 let activeAudioPlayers = []; 
@@ -160,24 +160,20 @@ async function speakText() {
     ttsStatusMsg.classList.add('text-primary-neon');
     globalAudioBlob = null;
 
+    // The API URL now points to the Vercel Serverless Function endpoint
+    const apiUrl = '/api/tts-proxy'; 
+    
+    // Payload only sends the necessary data (text and voiceName), NOT the API key
     const payload = {
-        contents: [{ parts: [{ text: text }] }],
-        generationConfig: {
-            responseModalities: ["AUDIO"],
-            speechConfig: {
-                voiceConfig: {
-                    prebuiltVoiceConfig: { voiceName: voiceName }
-                }
-            }
-        },
-        model: "gemini-2.5-flash-preview-tts"
+        text: text,
+        voiceName: voiceName
     };
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
     
     try {
         let response;
         // Retry logic with exponential backoff
         for (let i = 0; i < 3; i++) {
+            // The fetch request now goes to your secure Vercel function
             response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -186,18 +182,25 @@ async function speakText() {
 
             if (response.ok) break;
             
-            if (i < 2) { // Only retry if not on the last attempt
+            if (i < 2) { 
                 const delay = Math.pow(2, i) * 1000;
                 await new Promise(resolve => setTimeout(resolve, delay));
             } else {
-                throw new Error(`API error: ${response.status} ${response.statusText}`);
+                throw new Error(`Proxy error: ${response.status} ${response.statusText}`);
             }
         }
         
         const result = await response.json();
-        const part = result?.candidates?.[0]?.content?.parts?.[0];
-        const audioData = part?.inlineData?.data;
-        const mimeType = part?.inlineData?.mimeType;
+        
+        // Check for server-side errors returned by the proxy function
+                if (result.error) {
+                     throw new Error(result.error);
+                }
+                // If no errors, the original audio processing logic continues here...
+                
+                const part = result?.candidates?.[0]?.content?.parts?.[0];
+                const audioData = part?.inlineData?.data;
+                const mimeType = part?.inlineData?.mimeType;
 
         if (audioData && mimeType && mimeType.startsWith("audio/")) {
             const rateMatch = mimeType.match(/rate=(\d+)/);
