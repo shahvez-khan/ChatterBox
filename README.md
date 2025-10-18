@@ -79,7 +79,7 @@ To make the live site fully functional, the API key file must be present on the 
 
 The live version of this application is hosted here:
 
-> [https://shahvez-khan.github.io/ChatterBox/]( https://shahvez-khan.github.io/ChatterBox/)
+> [[https://shahvez-khan.github.io/ChatterBox/](https://chatter-box-dun.vercel.app/)]
 
 -----
 
