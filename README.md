@@ -1,8 +1,7 @@
-This is a comprehensive `README.md` file you can use for your `shahvez-khan/ChatterBox` repository. You can create a new file named `README.md` in the root of your repository and paste this content into it.
 
 -----
 
-# ChatterBox: AI Voice & Text Conversion Service 🗣️
+# ChatterBox: AI Voice & Text Conversion Service 
 
 [](https://www.google.com/url?sa=E&source=gmail&q=https://shahvez-khan.github.io/ChatterBox/)
 [](https://github.com/shahvez-khan/ChatterBox)
